@@ -18,6 +18,12 @@
 		0F154FC42A34A77F00D24501 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 0F154FC32A34A77F00D24501 /* FirebaseFirestore */; };
 		0F154FC62A34A77F00D24501 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0F154FC52A34A77F00D24501 /* FirebaseFirestoreSwift */; };
 		0F154FC82A34A77F00D24501 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 0F154FC72A34A77F00D24501 /* FirebaseStorage */; };
+		0F154FCA2A34E01B00D24501 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F154FC92A34E01B00D24501 /* HomeView.swift */; };
+		0F154FCC2A34E0B600D24501 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F154FCB2A34E0B600D24501 /* DetailView.swift */; };
+		0F154FCE2A34E65C00D24501 /* FirebaseImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F154FCD2A34E65C00D24501 /* FirebaseImageService.swift */; };
+		0F154FD02A34ECB300D24501 /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F154FCF2A34ECB300D24501 /* ImageModel.swift */; };
+		0F154FD22A34EE5B00D24501 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F154FD12A34EE5B00D24501 /* DetailViewModel.swift */; };
+		0F154FD42A35E6C300D24501 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F154FD32A35E6C300D24501 /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +33,12 @@
 		0F154F912A30F1DD00D24501 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0F154F942A30F1DD00D24501 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0F154FBA2A34A4DD00D24501 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0F154FC92A34E01B00D24501 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		0F154FCB2A34E0B600D24501 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		0F154FCD2A34E65C00D24501 /* FirebaseImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseImageService.swift; sourceTree = "<group>"; };
+		0F154FCF2A34ECB300D24501 /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
+		0F154FD12A34EE5B00D24501 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		0F154FD32A35E6C300D24501 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +85,7 @@
 				0F154F912A30F1DD00D24501 /* Assets.xcassets */,
 				0F154FBA2A34A4DD00D24501 /* GoogleService-Info.plist */,
 				0F154F932A30F1DD00D24501 /* Preview Content */,
+				0F154FD32A35E6C300D24501 /* ImagePicker.swift */,
 			);
 			path = DailyJournal;
 			sourceTree = "<group>";
@@ -88,6 +101,7 @@
 		0F154F9B2A30FA5D00D24501 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0F154FCF2A34ECB300D24501 /* ImageModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -104,6 +118,8 @@
 		0F154F9D2A30FA6D00D24501 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0F154FC92A34E01B00D24501 /* HomeView.swift */,
+				0F154FCB2A34E0B600D24501 /* DetailView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -111,6 +127,7 @@
 		0F154F9E2A30FA7500D24501 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				0F154FD12A34EE5B00D24501 /* DetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -118,6 +135,7 @@
 		0F154F9F2A30FA9A00D24501 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				0F154FCD2A34E65C00D24501 /* FirebaseImageService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -204,6 +222,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F154FCA2A34E01B00D24501 /* HomeView.swift in Sources */,
+				0F154FD02A34ECB300D24501 /* ImageModel.swift in Sources */,
+				0F154FD22A34EE5B00D24501 /* DetailViewModel.swift in Sources */,
+				0F154FCE2A34E65C00D24501 /* FirebaseImageService.swift in Sources */,
+				0F154FCC2A34E0B600D24501 /* DetailView.swift in Sources */,
+				0F154FD42A35E6C300D24501 /* ImagePicker.swift in Sources */,
 				0F154F902A30F1DC00D24501 /* ContentView.swift in Sources */,
 				0F154F8E2A30F1DC00D24501 /* DailyJournalApp.swift in Sources */,
 			);
