@@ -11,19 +11,35 @@ struct HomeView: View {
     
     @State var selectedImages: [UIImage] = []
     @State var showImagePicker: Bool = false
-    @State var vm = DetailViewModel()
-    let service = FirebaseImageService()
-    
+    @StateObject var vm = DetailViewModel()
+
     var body: some View {
         VStack {
             ScrollView(.horizontal) {
-                Text("\(vm.images.count)")
-                ForEach(vm.images) { image in
-                    AsyncImage(url: URL(string: image.path))
+                ForEach(vm.imageURLs, id: \.self) { image in
+                    AsyncImage(url: URL(string: image.absoluteString)) { phase in
+                        switch phase {
+                        case .empty:
+                            ProgressView()
+                        case .success(let image):
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                        case .failure(let error):
+                            Image(systemName: "exclamationmark.icloud")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 40, height: 40)
+                            Text("Failed to load image: \(error.localizedDescription)")
+                                .foregroundColor(.red)
+                        @unknown default:
+                            EmptyView()
+                        }
+                    }
                 }
             }
-            .onAppear {
-                self.vm.fetchImages()
+            .task {
+                vm.fetchImages()
             }
             
             Button(action: {

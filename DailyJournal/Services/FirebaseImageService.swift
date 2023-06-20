@@ -1,10 +1,3 @@
-//
-//  FirebaseImageService.swift
-//  DailyJournal
-//
-//  Created by Илья Меркуленко on 11.06.2023.
-//
-
 import Foundation
 import FirebaseStorage
 import FirebaseFirestore
@@ -14,19 +7,21 @@ class FirebaseImageService {
     
     let storage = Storage.storage()
     
-    func uploadImage(_ image: UIImage, completion: @escaping (Error?) -> Void) {
-        
-        let path = "images/\(UUID().uuidString).jpg"
+    func uploadImage(_ image: UIImage, completion: @escaping (Error?) -> ()) {
         let storageRef = storage.reference()
+        
+        let path = "images/\(UUID().uuidString).jpeg"
         let imageRef = storageRef.child(path)
+        let metaData = StorageMetadata()
+        metaData.contentType = "image/jpeg"
 
         guard let imageData = image.jpegData(compressionQuality: 0.8) else {
             completion(nil)
             return
         }
 
-        imageRef.putData(imageData, metadata: nil) { (metadata, error) in
-            guard let metadata = metadata else {
+        imageRef.putData(imageData, metadata: metaData) { (metadata, error) in
+            guard metadata != nil else {
                 completion(error)
                 return
             }
@@ -34,51 +29,36 @@ class FirebaseImageService {
                 let db = Firestore.firestore()
                 db.collection("images").document().setData(["path": path])
             }
-//            print("Metadata size: \(metadata.size)")
         }
     }
     
-    func downloadImage(at path: String, completion: @escaping (UIImage?, Error?) -> Void) {
+    func downloadImage(at path: String, completion: @escaping (UIImage?) -> Void) {
         
         let storageRef = storage.reference(withPath: path)
         
-        storageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+        storageRef.getData(maxSize: 3 * 1024 * 1024) { data, error in
             if let error = error {
-                completion(nil, error)
+                print("Error downloading image: \(error.localizedDescription)")
+                completion(nil)
             } else if let data = data, let image = UIImage(data: data) {
-                completion(image, nil)
+                print("downloadImage size: \(image.size), and data count: \(data.count)")
+                completion(image)
             } else {
-                completion(nil, nil)
+                completion(nil)
             }
         }
     }
     
-    func uploadImages(_ images: [UIImage], completion: @escaping (Error?) -> Void) {
-        let storageRef = storage.reference()
+    func downloadImagebyURL(path: String, completion: @escaping (URL?) -> Void) {
+        let storageRef = storage.reference().child(path)
         
-        let group = DispatchGroup()
-        
-        for image in images {
-            group.enter()
-            
-            guard let imageData = image.jpegData(compressionQuality: 0.8) else {
-                group.leave()
-                continue
+        storageRef.downloadURL { url, err in
+            if let err = err {
+                print("Download error: \(err.localizedDescription)")
+                completion(nil)
+            } else {
+                completion(url)
             }
-            
-            let imageRef = storageRef.child("images/\(UUID().uuidString).jpg")
-            
-            imageRef.putData(imageData, metadata: nil) { (_, error) in
-                if let error = error {
-                    completion(error)
-                } else {
-                    group.leave()
-                }
-            }
-        }
-        
-        group.notify(queue: .main) {
-            completion(nil)
         }
     }
 }
